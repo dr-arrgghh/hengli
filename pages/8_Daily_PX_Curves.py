@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.title("Daily PX Curves (12 Mths)")
+st.title("Daily PX Curves")
 
 @st.cache_data
 def load_price_data():
@@ -55,7 +55,7 @@ else:
     st.subheader(f"Price Curves for selected dates: {selected_dates}")
     fig = px.line(df_filtered, x="Contract", y="Price", color="Date Label",
                   title=f"Price Changes for selected dates: {selected_dates}",
-                  labels={"Contract": "Contract Month (Jan-Dec)", "Price": "Price ($)", "Date Label": "Selected Date"})
+                  labels={"Contract": "Contract Month (Jan-Dec)", "Price": "PX Price ($)", "Date Label": "Selected Date"})
 
     # Show the plot
     st.plotly_chart(fig)
