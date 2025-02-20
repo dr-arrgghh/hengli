@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.title("Daily PX Curves")
+st.title("Daily PXN Curves")
 
 @st.cache_data
 def load_price_data():
-    file_path = "data\px_curves.xlsx"
+    file_path = "data\pxn_curves.xlsx"
     df = pd.read_excel(file_path)
     df["Date"] = pd.to_datetime(df["Virtual Day"], format="%Y-%m-%d")
     return df
@@ -16,8 +16,8 @@ df_prices = load_price_data()
 
 # Sidebar filter: Select multiple dates
 available_dates = df_prices['Date'].dt.date.unique()  # Get unique dates
-selected_dates = st.sidebar.multiselect("Select Dates", available_dates)
-
+with st.sidebar.expander("Select Dates"):
+    selected_dates = st.multiselect("Choose Dates", available_dates)
 # Check if no dates are selected
 if not selected_dates:
     st.warning("Please select at least one date to compare.")
@@ -52,10 +52,9 @@ else:
     df_filtered['Date Label'] = df_filtered['Date'].dt.date.astype(str)
 
     # Plot daily prices for the selected dates and contract months (Jan-Dec)
-    st.subheader(f"Price Curves for selected dates: {selected_dates}")
     fig = px.line(df_filtered, x="Contract", y="Price", color="Date Label",
-                  title=f"Price Changes for selected dates: {selected_dates}",
-                  labels={"Contract": "Contract Month (Jan-Dec)", "Price": "PX Price ($)", "Date Label": "Selected Date"})
+                  title="PXN Curve",
+                  labels={"Contract": "Contract Month", "Price": "PXN Price ($)", "Date Label": "Selected Date"})
 
     # Show the plot
     st.plotly_chart(fig)
