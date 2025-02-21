@@ -19,8 +19,9 @@ def handle_file_upload():
     """Manages file upload persistence across pages and uses a default file if none is uploaded."""
     if "uploaded_file" not in st.session_state:
         st.session_state.uploaded_file = None
-
-    uploaded_file = st.sidebar.file_uploader("Choose an Excel File", type=["xlsx"])
+        
+    with st.sidebar.expander("Choose an Excel File"):
+        uploaded_file = st.sidebar.file_uploader("Choose an Excel File", type=["xlsx"])
 
     if uploaded_file:
         st.session_state.uploaded_file = uploaded_file

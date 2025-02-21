@@ -13,6 +13,12 @@ daily_pxn_curves = st.Page(
     icon=":material/stacked_line_chart:"
 )
 
+daily_naphtha_curves = st.Page(
+    page="pages\daily_naphtha_curves.py",
+    title="Daily Naphtha Curves",
+    icon=":material/stacked_line_chart:"
+)
+
 operating_rate = st.Page(
     page="pages\operating_rate.py",
     title="Operating Rates",
@@ -26,12 +32,24 @@ turnaround = st.Page(
     icon=":material/power_settings_new:"
 )
 
+px_production = st.Page(
+    page="pages\px_production.py",
+    title="PX Production",
+    icon=":material/precision_manufacturing:"
+)
+
+px_inventory = st.Page(
+    page="pages\px_inventory.py",
+    title="PX Inventory",
+    icon=":material/inventory_2:"
+)
+
 # --- NAVIGATION SETUP --- #
 # pg = st.navigation(pages=[daily_curves, operating_rate, turnaround])
 pg = st.navigation(
     {
-        "PX Fundamental Analysis": [operating_rate, turnaround],
-        "Pricing Curves": [daily_px_curves, daily_pxn_curves]
+        "PX Fundamental Analysis": [px_inventory, px_production, operating_rate, turnaround],
+        "Pricing Curves": [daily_px_curves, daily_pxn_curves, daily_naphtha_curves]
     }
 )
 
